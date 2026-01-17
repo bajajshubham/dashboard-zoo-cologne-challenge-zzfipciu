@@ -26,4 +26,4 @@ The scripts are stored in `package.json` file and can be executed by command `pn
 ### Steps to reproduce for development
 1. Clone or fork the repository
 2. Install the dependencies using command `pnpm install`. If you are working on Stackblitz, the dependencies will be installed automatically.
-3. To start the application in development mode execute command `pnpm run dev`.`
+3. To start the application in development mode execute command `pnpm run dev`.
