@@ -28,6 +28,8 @@ This information will also be shared with you where needed as part of the challe
 
 So, without further ado: Welcome, new IT Director of the Cologne Zoo! As you can see, the zoo dashboard was badly damaged by the recent malware attacks from the Duisburg Zoo. The old IT Director quit after that attack as he just could not take it anymore. The staff is looking to you to fix this mess and bring the zoo dashboard back to its former glory! 🐻 🐵 Sadly the IT-Department has been underfunded for years before the attack - so the application is quite dated.
 
+---
+
 ### Task 1: Take stock of the repository
 
 In a first step you should inspect the health of the project and report on everything you notice while doing so. This will help you determine what repairs are necessary in the coming steps.
@@ -46,6 +48,8 @@ Please take stock of the page using developer tools, your instincts, ... and wri
 - On running `pnpm run dev`, an error message saying _alert is not defined_ with status code **500**
 - Alert() is a method available on browser and not defined for server/node.js
 - Under Networks tab in developer tools, a failed **GET** request for `content-type: text/html;charset=utf8` with status code **500** can be seen.
+
+  ***
 
 ### Task 2: Get the basics running again
 
@@ -68,6 +72,8 @@ Zookeepers reported that the error sometimes changes when reloading the page aft
 - Animal id not being generated at creation time and missing.
 - No `README.md` file to guide a developer through the codebase
 
+  ***
+
 ### Task 3: Start the documentation
 
 You got it to work! Nice, now the basic functionality is back for the zookeepers. This would be a great point to start on documenting the project. As you can see there is not even a readme file! The old IT Director seems to have left this project in bad shape. Please add documentation with basics on the project, how to start, stop, test, ... it and whatever else information you deem important.
@@ -76,7 +82,19 @@ Add your solution below, either as an inline text or link to new documentation f
 
 <span style="color:green"> **solution** </span>
 
-- Documented: Tech stack, Available scripts and Steps to reproduce for development for starters
+**For Starters**
+
+- Heading/Title
+- Project Description
+- Tech stack
+- Steps to reproduce for development
+- Project Structure
+- Testing and Development
+  - Available scripts
+  - Steps to Test Locally
+- Support
+
+  ***
 
 ### Task 4: Test fixing
 
@@ -86,6 +104,8 @@ There's a failing test that for the age calculation helper. Can you figure out w
 
 - The test case was correct, but the difference in milliseconds was 0. So fixed implementation to return minimum age as 1 year when the difference is 0. Also used Math.ceil() to round up non zero values as well.
 - Returned result of `Math.max(1, Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365)))` in useCalculateAgeInYears.ts file.
+
+  ***
 
 ### Task 5: UI Fixing and Improvement
 
@@ -105,6 +125,8 @@ Please fix the two above problems and outline what was necessarry to do so.
 - Added an age property to each animal object in the sorted array using array map method.
 - Age calculation is pre-computed and not on each render.
 
+  ***
+
 ### Task 6: UI Feature 1
 
 The zookeepers want to be able to see all details of an animal. Please create such a view that allows them to do so, outline anything about your process while adding the view below. The zookeepers didn't have time for more information, sorry. They'll surely be glad to criticize the first version intensly though and will want to know why you went for the approach you chose.
@@ -115,6 +137,14 @@ The zookeepers want to be able to see all details of an animal. Please create su
 - Added columns
   - Height
   - Favourite Food
+
+**EDIT**
+
+1. Adding `id: string` to type Animal in types.ts
+2. Generating uuid for each animal in fakeData.ts file while creating fake animal.
+3. Create `pages` folder, and in that an `animal` folder. create `[id].vue` file.
+
+   ***
 
 ### Task 7: Logic Feature
 
@@ -138,6 +168,8 @@ To calculate the food an animal needs in kilograms in 1 day, the zookeepers use 
 - Unit test cases are present in the test file in `/utils/useCalculateRequiredFood.test.ts`.
 - Assuming 31 days in each month, easier for zookeepers to maintain/order and we don't want our animals to go hungry, right!?
 - Keeping upto two decimal places for the required monthly food.
+
+  ***
 
 ### Task 8: Plan New Feature
 
@@ -315,8 +347,25 @@ type FeedingTask = {
 
 `This will help prevent another disastrous specification.`
 
+---
+
 ### Task 9: Finish the documentation
 
 Revisit docs from step 3, see if you want to add anything. Also think about bonuses. Add a general comment about anything (inside the universe of the challenge or out of it) if you want to.
 
-// Your solution
+<span style="color:green"> **solution** </span>
+
+**After Updating**
+Added features and Contribution Guidelines section
+
+- Heading/Title
+- Project Description
+- Tech stack
+- Steps to reproduce for development
+- Project Structure
+- Testing and Development
+  - Available scripts
+  - Steps to Test Locally
+- Features
+- Contribution Guidelines
+- Support
