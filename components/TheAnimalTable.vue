@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import type { Animal } from '~/types';
-import useCalculateAgeInYears from '~/utils/useCalculateAgeInYears';
+import useCalculateRequiredFood from '~/utils/useCalculateRequiredFood'
 
 const props = defineProps<{
   animals: Animal[];
@@ -25,6 +25,12 @@ const animalsSortedByName = computed(() =>
       }
       return 0;
     })
+    .map((animal) => ({
+      ...animal,
+      monthlyFoodRequired: (
+        useCalculateRequiredFood(animal, animal.age) * 31
+      ).toFixed(2),
+    }))
 );
 </script>
 
@@ -38,12 +44,26 @@ const animalsSortedByName = computed(() =>
         <th>Gender</th>
         <th>Age (yrs)</th>
         <th>Weight (kg)</th>
+        <th>Height (m)</th>
+        <th>Favourite Fruit</th>
+        <th>Food required for next month (kg)</th>
       </tr>
     </thead>
     <tbody>
       <tr
         v-for="(
-          { species, gender, name, age, birthdate, weight }, animalIndex
+          {
+            species,
+            gender,
+            name,
+            age,
+            birthdate,
+            weight,
+            height,
+            favouriteFruit,
+            monthlyFoodRequired,
+          },
+          animalIndex
         ) in animalsSortedByName"
         :key="animalIndex"
       >
@@ -53,6 +73,9 @@ const animalsSortedByName = computed(() =>
         <td>{{ gender }}</td>
         <td>{{ age }}</td>
         <td>{{ weight }}</td>
+        <td>{{ height }}</td>
+        <td>{{ favouriteFruit }}</td>
+        <td>{{ monthlyFoodRequired }}</td>
       </tr>
     </tbody>
   </table>
