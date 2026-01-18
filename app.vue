@@ -12,9 +12,9 @@ const { animals } = useAnimals();
         data.
       </p>
       <p>
-        Please contact the zoo admin at "admin [at] zoo-cologne [dot] de" for
-        support with the dashboard. Cyber-Attacks from the Duisburg Zoo have
-        become more frequent on the past, so be on the lookout.
+        Please contact the zoo admin at "admin@zoo-cologne.de" for support with
+        the dashboard. Cyber-Attacks from the Duisburg Zoo have become more
+        frequent on the past, so be on the lookout.
       </p>
     </div>
     <div class="mt-6 py-4 border-t border-gray-300">
@@ -22,4 +22,5 @@ const { animals } = useAnimals();
     </div>
     <the-animal-table v-if="animals" :animals="animals" />
   </div>
+  <NuxtPage />
 </template>
