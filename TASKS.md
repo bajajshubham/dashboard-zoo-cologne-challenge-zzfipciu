@@ -34,7 +34,7 @@ In a first step you should inspect the health of the project and report on every
 
 Please take stock of the page using developer tools, your instincts, ... and write down below what you find.
 
-**solution**
+<span style="color:green"> **solution** </span>
 
 - Quick overview shows
 
@@ -56,7 +56,7 @@ Now that we know that is broken, let's try to get things running again, step by 
 
 Zookeepers reported that the error sometimes changes when reloading the page after the initial start.
 
-**solution**
+<span style="color:green"> **solution** </span>
 
 - Removed `alert('get wrecked cologne zoo!');` from **app.vue** file that was blocking the page to render at the server side.
 - Content successfully displayed on the screen after removing alert from the code.
@@ -74,7 +74,7 @@ You got it to work! Nice, now the basic functionality is back for the zookeepers
 
 Add your solution below, either as an inline text or link to new documentation file(s) you've created.
 
-**solution**
+<span style="color:green"> **solution** </span>
 
 - Documented: Tech stack, Available scripts and Steps to reproduce for development for starters
 
@@ -82,7 +82,7 @@ Add your solution below, either as an inline text or link to new documentation f
 
 There's a failing test that for the age calculation helper. Can you figure out what is broken in the implementation or the test it is and resolve the problem? All zookeepers are really interested in what is going on here.
 
-**solution**
+<span style="color:green"> **solution** </span>
 
 - The test case was correct, but the difference in milliseconds was 0. So fixed implementation to return minimum age as 1 year when the difference is 0. Also used Math.ceil() to round up non zero values as well.
 - Returned result of `Math.max(1, Math.ceil(differenceInMilliseconds / (1000 * 60 * 60 * 24 * 365)))` in useCalculateAgeInYears.ts file.
@@ -98,7 +98,7 @@ The zookeepers report that the table is incomplete and different than usually. M
 
 Please fix the two above problems and outline what was necessarry to do so.
 
-**solution**
+<span style="color:green"> **solution** </span>
 
 - Added Name column in third place in table, destructured from the animals array.
 - Sorted it by name by comparing uppercase letters in the compare function in sort method.
@@ -109,7 +109,7 @@ Please fix the two above problems and outline what was necessarry to do so.
 
 The zookeepers want to be able to see all details of an animal. Please create such a view that allows them to do so, outline anything about your process while adding the view below. The zookeepers didn't have time for more information, sorry. They'll surely be glad to criticize the first version intensly though and will want to know why you went for the approach you chose.
 
-**solution**
+<span style="color:green"> **solution** </span>
 
 - Displayed all available details in the table -> this allows zookeeper to view all the details of an animal at one place -> To-Do: To minimize table view to important fields and move other details to modal/new view for detailed view to avoid cognitive overload.
 - Added columns
@@ -130,7 +130,7 @@ To calculate the food an animal needs in kilograms in 1 day, the zookeepers use 
 4. If the animal is male, add 20 %
 5. If the animal is a fish: The required food is 0 kg
 
-**solution**
+<span style="color:green"> **solution** </span>
 
 - Food for fish is straight up 0kg.
 - Assuming the same sequence for the logic from formula 1 to 4. Change in the order of execution, changes the final outcome of arithemic operations.
@@ -163,7 +163,157 @@ Please create a breakdown for this feature. You can focus on aspects like: What 
 
 Don't spend more thatn 15-30 minutes here - planning like this can quickly become quite complex and we want to prevent this challenge taking too much of your time!
 
-// Your solution
+<span style="color:green"> **solution** </span>
+
+### 1. Feature Goal (User Perspective)
+
+As a zookeeper, I want to plan when and what to feed each animal, and see a clear daily overview of upcoming feeding tasks with the correct amount of food required.
+
+- I can assign feeding plans per animal
+- I can see a grouped daily todo list
+- I can prepare food in advance without manual calculations
+
+### 2. Functional Scope
+
+**Current scope**
+
+- Plan feeding per animal
+- Select:
+  - A date
+  - A fruit
+- Automatically calculate required food amount (kg)
+- Show grouped daily feeding tasks
+- Read-only overview
+
+**Future scope**
+
+- Feeding time in a day
+- Multiple feedings per animal per day
+- Inventory/stock management
+- Feeding completion tracking
+- Permissions / roles
+
+### 3. Basic Types (1st Draft)
+
+**FeedingTask**
+
+```
+type FeedingTask = {
+  id: string
+  animalId: string
+  date: Date
+  fruit: Fruit
+}
+```
+
+### 4. Major Tasks & Suggested Order
+
+**1. Clarify Requirements (Critical)**
+
+- Confirm
+
+  - If one feeding per animal per day is allowed
+  - If same animal can be fed on consecutive days
+  - Is the fruit selected in the planner always the favourite fruit?
+  - Or should it override the favourite fruit for that day?
+
+- Confirm date handling
+  - Timezone assumptions
+  - Are past dates allowed or not
+
+**2. The Logic**
+
+- Reuse existing logic:
+
+  - useCalculateAgeInYears
+  - useCalculateRequiredFood
+
+- Create Unit-test cases
+
+**3. State Management**
+
+- Decide where feeding plans are stored
+
+  - local state (current)
+  - API-backed storage (future)
+
+- Store feeding tasks as an array of task objects
+- Create selector
+  - group tasks by date
+  - sort dates ascending
+  - sort animals alphabetically per day
+  - sort daily tasks by time (future scope)
+
+### 4. UI/UX Design
+
+- Use Design Thinking Principles
+
+  - Understand the user. Empathize!
+  - List down user's pain points
+
+- Create Wireframes
+
+  - Draw a rough UI
+  - Sketch or use tools keeping design standards and Gestalt principles in mind
+
+- Create Mockups and prototype
+
+  - Create UI designs in Figma or Adobe XD, or any other tool
+  - Create UI design prototypes
+
+- UI/UX Testing with the uesr
+  - Perform Moderated Testing
+  - Perform A/B Testing
+
+**_A. Feeding Planning UI_**
+**Purpose**: Create feeding tasks
+**Elements**
+
+- Animal selector (dropdown/search)
+- Date picker
+- Fruit selector
+- “Add feeding task” button
+
+**UX considerations**
+
+- Prevent duplicate entries (same animal + same day)
+- Show instant preview of required food
+
+**_B. Feeding Overview UI (Main Feature)_**
+**Layout**
+
+- 24.03.2012
+  - Anni, Bananas, 20kg
+  - Belfried, Cherries, 10kg
+- 27.03.2012
+  - Leo — Apples — 15 kg
+
+**Design choices**
+
+- Grouped by day (accordion or sectioned list)
+- Clear typographic hierarchy:
+  - Date as header
+  - Animal name emphasized
+- Units always visible (kg)
+
+### 6. Open Questions/Risks Discussion
+
+- Inconsistent Requirements
+  - Should cherry bonus apply if cherries are chosen even if not favourite?
+  - Should amount of food change if an animal is sick?
+- Edge Cases
+  - What happens if an Animal dies or removed?
+  - Multiple zookeepers editing simultaneously?
+- Scalability
+  - Hundreds of animals?
+
+### 7. Acceptance Criteria and Final Meeeting with Zookeepers (User)
+
+- Discuss the documented/translated requirements with the users for its accuracy
+- Discuss the process and UI acceptance
+- Discuss the integration of app with their daily routine
+
+`This will help prevent another disastrous specification.`
 
 ### Task 9: Finish the documentation
 
