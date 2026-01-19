@@ -5,7 +5,7 @@ const { animals } = useAnimals();
 </script>
 
 <template>
-  <div class="my-10 container mx-auto">
+  <div class="my-5 container mx-auto">
    <nav class="p-2 mb-2"><h1 class="text-4xl">COLOGNE ZOO</h1></nav>
     <div class="my-2">
       <p>
