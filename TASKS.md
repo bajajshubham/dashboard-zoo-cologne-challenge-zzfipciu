@@ -141,8 +141,13 @@ The zookeepers want to be able to see all details of an animal. Please create su
 **EDIT**
 
 1. Adding `id: string` to type Animal in types.ts
-2. Generating uuid for each animal in fakeData.ts file while creating fake animal.
-3. Create `pages` folder, and in that an `animal` folder. create `[id].vue` file.
+2. Generating `uuid` for each animal in `fakeData.ts` file while creating fake animal.
+3. Create `pages` folder, and in that an `animals` folder. create `[id].vue` file.
+4. used `useState()` inside useAnimal composable instead of ref to use it globally.
+5. Created `index.vue` under pages, and moved the logic from `app.vue` to here.
+6. Moved details and calculation from _table page_ to newly created page _id page_.
+7. Used route based logic to navigate between pages
+8. Updated CSS
 
    ***
 
