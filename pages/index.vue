@@ -6,7 +6,7 @@ const { animals } = useAnimals();
 
 <template>
   <div class="my-10 container mx-auto">
-    <h1 class="text-4xl">Cologne Zoo</h1>
+   <nav class="p-2 mb-2"><h1 class="text-4xl">COLOGNE ZOO</h1></nav>
     <div class="my-2">
       <p>
         This is the overview board of the Cologne Zoo. It can be used by
