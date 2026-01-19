@@ -1,7 +1,7 @@
 import type { Animal } from '~/types'
 
 export default () => {
-  const animals = ref<Animal[]>([])
+  const animals = useState<Animal[]>('animals',()=>[])
 
   const fetch = async (): Promise<Animal[]> => {
     animals.value = await $fetch('/api/animals')

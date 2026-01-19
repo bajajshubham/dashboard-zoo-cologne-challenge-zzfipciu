@@ -9,20 +9,19 @@ const id = route.params.id as string
 
 const { animals, fetch } = useAnimals()
 
-// Fetch animals if not already loaded
 onMounted(fetch)
 
 const animalDetails = computed(() => {
-  const a = animals.value.find((animal) => animal.id === id)
-  if (!a) return null
+  const animal = animals.value.find((animal) => animal.id === id)
+  if (!animal) return null
 
-  const age = useCalculateAgeInYears(new Date(a.birthdate))
+  const age = useCalculateAgeInYears(new Date(animal.birthdate))
   const monthlyFoodRequired = (
-    useCalculateRequiredFood(a, age) * 31
+    useCalculateRequiredFood(animal, age) * 31
   ).toFixed(2)
 
   return {
-    ...a,
+    ...animal,
     age,
     monthlyFoodRequired,
   }
@@ -35,12 +34,12 @@ const animalDetails = computed(() => {
     <ul class="space-y-2">
       <li><strong>Species:</strong> {{ animalDetails.species }}</li>
       <li><strong>Gender:</strong> {{ animalDetails.gender }}</li>
+      <li><strong>Birthdate:</strong> {{ animalDetails.birthdate }}</li>
       <li><strong>Age (yrs):</strong> {{ animalDetails.age }}</li>
       <li><strong>Weight (kg):</strong> {{ animalDetails.weight }}</li>
       <li><strong>Height (m):</strong> {{ animalDetails.height }}</li>
       <li><strong>Favourite Fruit:</strong> {{ animalDetails.favouriteFruit }}</li>
       <li><strong>Food required next month (kg):</strong> {{ animalDetails.monthlyFoodRequired }}</li>
-      <li><strong>Birthdate:</strong> {{ animalDetails.birthdate }}</li>
     </ul>
   </div>
   <div v-else class="text-center mt-10">

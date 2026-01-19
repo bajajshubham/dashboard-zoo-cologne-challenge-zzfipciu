@@ -1,27 +1,24 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
-import type { AnimalWithAgeAndRequiedFood } from '~/types';
-import { navigateTo } from '#app';
+import { computed } from 'vue'
+import type { Animal } from '~/types'
+
+const router = useRouter()
 
 const props = defineProps<{
-  animals: AnimalWithAgeAndRequiedFood[];
-}>();
+  animals: Animal[]
+}>()
 
 const animalsSortedByName = computed(() =>
   props.animals
     .slice()
     .sort((animalA, animalB) => {
-      const nameA = animalA.name.toUpperCase();
-      const nameB = animalB.name.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
+      const nameA = animalA.name.toUpperCase()
+      const nameB = animalB.name.toUpperCase()
+      if (nameA < nameB) return -1
+      if (nameA > nameB) return 1
+      return 0
     })
-);
+)
 </script>
 
 <template>
@@ -32,42 +29,37 @@ const animalsSortedByName = computed(() =>
         <th>Species</th>
         <th>Name</th>
         <th>Gender</th>
-        <th>Age (yrs)</th>
         <th>Weight (kg)</th>
         <th>Height (m)</th>
         <th>Favourite Fruit</th>
-        <th>Food required for next month (kg)</th>
       </tr>
     </thead>
     <tbody>
       <tr
         v-for="(
           {
-            id,
             species,
             gender,
             name,
-            age,
             weight,
             height,
             favouriteFruit,
-            monthlyFoodRequired,
+            id
           },
           animalIndex
         ) in animalsSortedByName"
         :key="id"
-        class="cursor-pointer"
-        @click="navigateTo(`/animal/${id}`)"
+        class="cursor-pointer hover:bg-gray-200"
+        @click="router.push(`/animals/${id}`)"
+
       >
         <td>{{ animalIndex + 1 }}</td>
         <td>{{ species }}</td>
         <td>{{ name }}</td>
         <td>{{ gender }}</td>
-        <td>{{ age }}</td>
         <td>{{ weight }}</td>
         <td>{{ height }}</td>
         <td>{{ favouriteFruit }}</td>
-        <td>{{ monthlyFoodRequired }}</td>
       </tr>
     </tbody>
   </table>

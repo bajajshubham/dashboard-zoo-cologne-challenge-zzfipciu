@@ -1,19 +1,6 @@
 <script setup lang="ts">
 
 const { animals } = useAnimals();
-const {setAnimalWithAgeAndRequiedFood} = useAnimalWithAgeAndRequiedFood();
-
-const animalsWithAgeAndRequiredFood = computed(()=>animals.value.slice().map((animal) => ({
-      ...animal,
-      age: useCalculateAgeInYears(new Date(animal.birthdate)),
-    })).map((animal) => ({
-      ...animal,
-      monthlyFoodRequired: (
-        useCalculateRequiredFood(animal, animal.age) * 31
-      ).toFixed(2),
-    })))
-console.log(animalsWithAgeAndRequiredFood.value)
-setAnimalWithAgeAndRequiedFood(animalsWithAgeAndRequiredFood)
 
 </script>
 
@@ -35,6 +22,6 @@ setAnimalWithAgeAndRequiedFood(animalsWithAgeAndRequiredFood)
     <div class="mt-6 py-4 border-t border-gray-300">
       <h2 class="text-2xl">Our (lovely) Animals:</h2>
     </div>
-    <the-animal-table v-if="animals" :animals="animalsWithAgeAndRequiredFood" />
+    <the-animal-table v-if="animals" :animals="animals" />
   </div>
 </template>
