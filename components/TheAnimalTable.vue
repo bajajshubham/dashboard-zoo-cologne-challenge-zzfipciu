@@ -1,19 +1,15 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
-import type { Animal } from '~/types';
-import useCalculateRequiredFood from '~/utils/useCalculateRequiredFood'
+import type { AnimalWithAgeAndRequiedFood } from '~/types';
+import { navigateTo } from '#app';
 
 const props = defineProps<{
-  animals: Animal[];
+  animals: AnimalWithAgeAndRequiedFood[];
 }>();
 
 const animalsSortedByName = computed(() =>
   props.animals
     .slice()
-    .map((animal) => ({
-      ...animal,
-      age: useCalculateAgeInYears(new Date(animal.birthdate)),
-    }))
     .sort((animalA, animalB) => {
       const nameA = animalA.name.toUpperCase();
       const nameB = animalB.name.toUpperCase();
@@ -25,12 +21,6 @@ const animalsSortedByName = computed(() =>
       }
       return 0;
     })
-    .map((animal) => ({
-      ...animal,
-      monthlyFoodRequired: (
-        useCalculateRequiredFood(animal, animal.age) * 31
-      ).toFixed(2),
-    }))
 );
 </script>
 
@@ -53,11 +43,11 @@ const animalsSortedByName = computed(() =>
       <tr
         v-for="(
           {
+            id,
             species,
             gender,
             name,
             age,
-            birthdate,
             weight,
             height,
             favouriteFruit,
@@ -65,7 +55,9 @@ const animalsSortedByName = computed(() =>
           },
           animalIndex
         ) in animalsSortedByName"
-        :key="animalIndex"
+        :key="id"
+        class="cursor-pointer"
+        @click="navigateTo(`/animal/${id}`)"
       >
         <td>{{ animalIndex + 1 }}</td>
         <td>{{ species }}</td>

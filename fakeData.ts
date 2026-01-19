@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 import type { Animal, Fruit, Gender } from './types'
 
 export const AARON: Animal = {
+  id: '33f38cb0-4757-42f4-92ca-0f1d7ef939ea',
   name: 'Aaron',
   species: 'dog',
   gender: 'male',
@@ -16,6 +17,7 @@ export const fakeAnimal = (): Animal => {
   const favouriteFruit = faker.helpers.arrayElement(['banana', 'apple', 'cherry']) satisfies Fruit
 
   return {
+    id: faker.string.uuid(),
     name: faker.person.firstName(gender),
     species: faker.animal.type(),
     birthdate: faker.date.past({ years: 25 }),
