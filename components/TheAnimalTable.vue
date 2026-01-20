@@ -20,8 +20,8 @@ const animalsSortedByName = computed(() =>
 </script>
 
 <template>
-  <table>
-    <thead>
+  <table class="border border-[#00c16a]/30">
+    <thead class="bg-[#00c16a]/30">
       <tr>
         <th>Index</th>
         <th>Species</th>
@@ -51,15 +51,18 @@ const animalsSortedByName = computed(() =>
 
 <style scoped>
 table {
-  @apply table-auto w-full text-left;
+  @apply table-auto w-full text-left mb-10;
+}
+th {
+  @apply py-2 px-4 w-40 font-semibold border-b-2 border-slate-300/30;
 }
 td {
-  @apply w-40;
+  @apply py-2 px-4 w-40 border-t border-slate-300/30;
 }
 tr {
-  @apply border-b-2;
+  @apply border-t;
 }
 tbody tr {
-  @apply hover:bg-gray-200;
+  @apply hover:bg-[#00c16a]/10;
 }
 </style>
